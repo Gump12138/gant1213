@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -40,14 +40,18 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">article<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item">
-                            <a class="dropdown-item-text" href=""></a>a</li>
-                        <li class="dropdown-item">b</li>
-                        <li class="dropdown-item">c</li>
+                            <a class="dropdown-item-text" href="/b/write/a.html">Java基础—逻辑</a></li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-item-text" href="/b/write/b.html">Java基础-编程语言特性</a></li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-item-text" href="/b/write/c.html">Java基础-数据类型</a></li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-item-text" href="/b/write/d.html">Java基础-数据结构</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropup no-arrow" id="user">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="'欢迎'+${user.getUsername()}+'!'">Valerie Luna</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="'欢迎'+${user.getUsername()}+'!'">unknow</span>
                         <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/25x25" alt="">
                     </a>
                     <!-- Dropdown - User Information -->

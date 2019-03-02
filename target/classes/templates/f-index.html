@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>Gant后台管理</title>
 
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" type="text/css" href="/f/vendor/fontawesome-free/css/all.min.css">
@@ -42,9 +42,9 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="/index">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>首页</span></a>
       </li>
 
       <!-- Divider -->
@@ -64,8 +64,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/buttons.html">Buttons</a>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/cards.html">Cards</a>
+            <a class="collapse-item" href="/f/html/buttons.html">Buttons</a>
+            <a class="collapse-item" href="/f/html/cards.html">Cards</a>
           </div>
         </div>
       </li>
@@ -79,10 +79,10 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/utilities-color.html">Colors</a>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/utilities-border.html">Borders</a>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/utilities-other.html">Other</a>
+            <a class="collapse-item" href="/f/html/utilities-color.html">Colors</a>
+            <a class="collapse-item" href="/f/html/utilities-border.html">Borders</a>
+            <a class="collapse-item" href="/f/html/utilities-animation.html">Animations</a>
+            <a class="collapse-item" href="/f/html/utilities-other.html">Other</a>
           </div>
         </div>
       </li>
@@ -92,27 +92,15 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Addons
+        工具
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link" href="/fblank">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>编辑器</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/login.html">Login</a>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/register.html">Register</a>
-            <a class="collapse-item" href="../../../../../../Documents/startbootstrap-sb-admin-2-4.0.0/forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="../public/error/f-404.html">404 Page</a>
-            <a class="collapse-item" href="/f/html/blank.html">Blank Page</a>
-          </div>
-        </div>
       </li>
 
       <!-- Nav Item - Charts -->
@@ -124,9 +112,9 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="/f/html/tables.html">
+        <a class="nav-link" href="/ftable">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>用户管理</span></a>
       </li>
 
       <!-- Divider -->
@@ -334,7 +322,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">概览</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
@@ -347,8 +335,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">用户量</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">00001</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -364,8 +352,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">访问量</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">000,000</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -381,10 +369,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">目标</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">000,000</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">

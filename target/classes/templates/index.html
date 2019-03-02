@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
 
   <meta charset="utf-8">
@@ -19,7 +19,7 @@
 <body>
 
 <!-- 导航 -->
-<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
+<nav id="nav" class="navbar navbar-inverse navbar-light bg-light navbar-embossed navbar-expand-lg fixed-bottom" style="margin: 0">
   <div class="container">
     <a class="navbar-brand" href="/index">Gant甘-首页</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,12 +36,16 @@
           <a class="nav-link" href="/b/about.html">About</a>
         </li>
         <li class="nav-item dropup">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">article<span class="caret"></span></a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">article<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li class="dropdown-item">
-              <a class="dropdown-item-text" href=""></a>a</li>
-            <li class="dropdown-item">b</li>
-            <li class="dropdown-item">c</li>
+              <a class="dropdown-item-text" href="/b/write/a.html">Java基础—逻辑</a></li>
+            <li class="dropdown-item">
+              <a class="dropdown-item-text" href="/b/write/b.html">Java基础-编程语言特性</a></li>
+            <li class="dropdown-item">
+              <a class="dropdown-item-text" href="/b/write/c.html">Java基础-数据类型</a></li>
+            <li class="dropdown-item">
+              <a class="dropdown-item-text" href="/b/write/d.html">Java基础-数据结构</a></li>
           </ul>
         </li>
         <li class="nav-item" id="login-li">
@@ -109,7 +113,7 @@
           <div class="box">
             <div class="content registerBox" style="display:none;">
               <div class="form">
-                <form id="registerForm" data-remote="true">
+                <form id="registerForm" data-remote="true" th:action="@{/regist}" th:method="post">
                   <input id="regist-username" class="form-control" type="text" placeholder="UserName" name="username">
                   <input id="regist-password" class="form-control" type="password" placeholder="Password" name="password">
                   <input id="regist-email" class="form-control" type="email" placeholder="Email" name="email">
@@ -139,25 +143,10 @@
   <script src="/b/js/login-register.js" type="text/javascript"></script>
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
-
   <script>
     $("#regist-username").blur(checkUsername);
     $("#regist-password").blur(checkPassword);
     $("#regist-email").blur(checkEmail);
-    $(function () {
-      //当表单提交时，调用所有的校验方法
-      $("#registerForm").submit(function(){
-        //1.发送数据到服务器
-        if(checkUsername() && checkPassword() && checkEmail()){
-          //校验通过,发送ajax请求，提交表单的数据   username=zhangsan&password=123
-          $.post("/regist",$(this).serialize());
-          return true;
-        }
-        //2.不让页面跳转
-        return false;
-        //如果这个方法没有返回值，或者返回为true，则表单提交，如果返回为false，则表单不提交
-      })
-    });
 
   </script>
 </body>

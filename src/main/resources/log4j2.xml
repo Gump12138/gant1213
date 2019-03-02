@@ -8,9 +8,9 @@
         <Property name="displayName">EurekaServer</Property>
     </Properties>
     <Appenders>
-        <Console name="console" target="SYSTEM_OUT" follow="true">
+        <Console name="console" target="SYSTEM_OUT" follow="false">
             <PatternLayout>
-                <pattern>${pattern}</pattern>
+                <pattern>%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"</pattern>
             </PatternLayout>
         </Console>
         <!-- 文件 每次运行程序会自动清空，由append属性决定 -->
@@ -33,13 +33,9 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <!-- <Logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"
-            /> <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"
-            /> <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"
-            /> -->
-        <Logger name="org.springframework" level="WARN" />
-        <Logger name="com.xuweihao" level="DEBUG" />
-        <Root level="DEBUG">
+        <Logger name="org.springframework" level="info" />
+        <Logger name="org.mybatis" level="debug" />
+        <Root level="INFO">
             <AppenderRef ref="console"/>
             <AppenderRef ref="error"/>
             <AppenderRef ref="rollingFile"/>

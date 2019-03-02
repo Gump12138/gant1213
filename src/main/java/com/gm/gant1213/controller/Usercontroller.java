@@ -5,12 +5,18 @@ import com.gm.gant1213.service.impl.UserServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -34,18 +40,28 @@ public class Usercontroller {
         return "f-index";
     }
 
+    @RequestMapping("/ftable")
+    public String ftable() {
+        return "tables";
+    }
+
+    @RequestMapping("/fblank")
+    public String fblank() {
+        return "blank";
+    }
+
     @RequestMapping("/regist")
-    public ModelAndView regist(ModelAndView modelAndView,String username, String password, String email,HttpSession session){
+    public String regist(Model model,String username, String password, String email,HttpSession session){
         Map <String,Object> map=userServiceimpl.regist(username,password,email);
         if ((boolean)map.get( "flag" )){
-            modelAndView.addObject( "user", map.get( "user" ) );
+            model.addAttribute( "user", map.get( "user" ) );
             session.setAttribute( "user", map.get( "user" ) );
-            modelAndView.setViewName( "lindex" );
+            return "lindex";
         }else {
-            modelAndView.addObject( "error",map.get( "errorMsg" ) );
-            modelAndView.setViewName( "index" );
+            model.addAttribute( "error",map.get( "errorMsg" ) );
+            return "index";
         }
-        return modelAndView;
+
     }
 
     @RequestMapping("/login")
@@ -66,7 +82,7 @@ public class Usercontroller {
         }
     }
 
-    @RequestMapping("/ftable")
+    @RequestMapping("/f-table")
     @ResponseBody
     public Object table(){
         Map<String, Object> map = new HashMap<>();
@@ -87,7 +103,7 @@ public class Usercontroller {
         StringBuilder stringBuffer=new StringBuilder(  );
         stringBuffer.append( new java.util.Date() );
         User u=(User)session.getAttribute( "user" );
-        stringBuffer.append( "\t" ).append( "UID:"+u.getId() ).append( "，用户名：" ).append( u.getUsername() ).append( "：删除了" ).append( c.size() ).append( "个用户信息" );
+        stringBuffer.append( "\t" ).append( "UID:" ).append( u.getId() ).append( "，用户名：" ).append( u.getUsername() ).append( "：删除了" ).append( c.size() ).append( "个用户信息" );
         model.addAttribute( "msg",stringBuffer );
         return stringBuffer.toString();
     }
@@ -98,9 +114,70 @@ public class Usercontroller {
         return "redirect:index";
     }
 
-    @RequestMapping("/upload")
+
+    @RequestMapping("/uploadImage")
     @ResponseBody
-    public String upload(String article){
-        return article;
+    public Map<String,Object> uploadMultipleFileHandler(HttpServletRequest request) throws IOException {
+        Map<String,Object> map = new HashMap <>();
+        MultipartHttpServletRequest multipartRequest=((MultipartHttpServletRequest) request);
+        List<MultipartFile> files=multipartRequest.getFiles( "file" );
+        for(MultipartFile file:files){
+            if(file!=null){
+                String  myFilename=file.getOriginalFilename();
+                System.out.println("上传时的文件名："+myFilename);
+                String filename=file.getOriginalFilename();
+                String fileBaseName=filename.substring(0,filename.lastIndexOf("."));
+                String fileExt=filename.substring(filename.lastIndexOf(".")+1).toLowerCase();
+                String filePath="C://Users/G/IdeaProjects/gant1213/src/main/resources/static/f/html/uploadimg/"+filename;
+                System.out.println("保存的路径:"+filePath);
+                File targetFile = new File(filePath);
+                if(!targetFile.exists()){
+                    //先得到文件的上级目录，并创建上级目录，在创建文件
+                    targetFile.getParentFile().mkdir();
+                    try {
+                        //创建文件
+                        targetFile.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                file.transferTo(targetFile);
+                String saveUrl =request.getContextPath()+"/f/html/uploadimg/"+filename;
+                System.out.print( "访问路径："+saveUrl );
+                map.put("url", saveUrl);
+            }else {
+                map.put( "file","file is null" );
+            }
+
+
+        }
+        return map;
+    }
+
+
+    @RequestMapping("/upload")
+    public String upload(HttpServletRequest request,Model model) throws Exception {
+        MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
+        List<MultipartFile> files=params.getFiles( "file" );
+        if (files.size()!=0){
+            BufferedOutputStream outputStream;
+            for (MultipartFile file:files){
+                if(!file.isEmpty()){
+                    try {
+                        byte[] bytes=file.getBytes();
+                        outputStream=new BufferedOutputStream( new FileOutputStream( new File(  "C://upload"+file.getOriginalFilename() ) )  );
+                        model.addAttribute( "file","文件上传成功" );
+                        outputStream.write( bytes );
+                        outputStream.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        String text=params.getParameter( "text" );
+        System.out.print( "上传的文本为："+text );
+        model.addAttribute( "text","文本上传成功："+text );
+        return "success";
     }
 }
