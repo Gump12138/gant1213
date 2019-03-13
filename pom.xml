@@ -95,6 +95,25 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<filtering>true</filtering>-->
+                <!--<excludes>-->
+                    <!--<exclude>-->
+                        <!--static/b/fonts-->
+                    <!--</exclude>-->
+                <!--</excludes>-->
+            <!--</resource>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<filtering>false</filtering>-->
+                <!--<excludes>-->
+                    <!--<exclude>templates/**</exclude>-->
+                <!--</excludes>-->
+                <!--<includes><include>**</include></includes>-->
+            <!--</resource>-->
+        <!--</resources>-->
     </build>
 
 </project>
