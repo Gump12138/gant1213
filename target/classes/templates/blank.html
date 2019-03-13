@@ -15,8 +15,9 @@
   <link href="/f/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <!-- Custom styles for this template-->
-  <link href="/f/css/summernote.css" rel="stylesheet">
+  <!--<link href="/f/css/summernote.css" rel="stylesheet">-->
   <link href="/f/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="/f/css/editormd.min.css" rel="stylesheet">
   <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" >-->
   <!--<link href="https://bootswatch.com/4/united/bootstrap.min.css" rel="stylesheet">-->
 
@@ -321,15 +322,16 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Summernote富文本编辑器</h1>
+          <h1 class="h3 mb-4 text-gray-800">Markdown编辑器editor.md</h1>
           <p class="mb-4">在线编辑-上传服务器-发布</p>
-          <form class="form" enctype="multipart/form-data" method="post" action="/upload">
-            <button type="button" onclick="content()">保存</button>
-            <label>
-              <input type="text" name="text" value="">
+
+          <form class="form" th:action="@{/upload}" th:method="post">
+            <label>标题：
+              <input name="title">
             </label>
-            <div id="summernote"></div>
-            <input type="submit" value="提交"/>
+            <button type="submit" id="asd" class="button">save</button>
+            <div id="my-editormd">
+            </div>
 
           </form>
 
@@ -382,46 +384,28 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
-  <script src="http://cdn.bootcss.com/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
-  <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!--<script src="http://cdn.bootcss.com/jquery-easing/1.4.1/jquery.easing.min.js"></script>-->
+  <script src="https://cdn.bootcss.com/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <!--<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
   <!-- Custom scripts for all pages-->
   <script src="/f/js/sb-admin-2.min.js"></script>
-  <script src="/f/js/summernote.min.js"></script>
-  <script type="text/javascript" src="/f/js/summernote-zh-CN.min.js"></script>
-
+  <!--<script src="/f/js/summernote.min.js"></script>-->
+  <!--<script type="text/javascript" src="/f/js/summernote-zh-CN.min.js"></script>-->
+  <script src="/f/js/editormd.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#summernote').summernote({
-        lang: 'zh-CN',
-        dialogsInBody:true,
-        minHeight:200,
-        focus: true,
-        placeholder:"请在此输入",
-        popover: false
-      })
-    });
-    function content(){
-      var data=$("#summernote").summernote("code");
-      console.log(data);
-      $.ajax({
-        data:data,
-        url:"/upload",
-        contentType:"application/json",
-        dataType:"json",
-        type:"post",
-        success:function (data) {
-          console.log("成功"+data);
-        },
-        error:function () {
-          console.log("失败"+data)
-        }
-      })
-    }
 
-
-
-
+    $(function() {
+      editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+        width   : "90%",
+        height  : 640,
+        syncScrolling : "single",
+        path    : "/f/lib/",//注意2：你的路径
+        saveHTMLToTextarea : true,//注意3：这个配置，方便post提交表单
+        imageUpload: true,
+        imageUploadURL: "/uploadImage",
+        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"]
+      });
+    })
 
   </script>
 </body>

@@ -1,12 +1,12 @@
 package com.gm.gant1213.controller;
 
 import com.gm.gant1213.domain.User;
+import com.gm.gant1213.domain.article;
 import com.gm.gant1213.service.impl.UserServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +50,31 @@ public class Usercontroller {
         return "blank";
     }
 
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @RequestMapping("/a")
+    public String a() {
+        return "/article/a";
+    }
+    @RequestMapping("/b")
+    public String b() {
+        return "/article/b";
+    }
+    @RequestMapping("/c")
+    public String c() {
+        return "/article/c";
+    }
+    @RequestMapping("/d")
+    public String d() {
+        return "/article/d";
+    }
+    @RequestMapping("/e")
+    public String e() {
+        return "/article/e";
+    }
     @RequestMapping("/regist")
     public String regist(Model model,String username, String password, String email,HttpSession session){
         Map <String,Object> map=userServiceimpl.regist(username,password,email);
@@ -126,8 +151,6 @@ public class Usercontroller {
                 String  myFilename=file.getOriginalFilename();
                 System.out.println("上传时的文件名："+myFilename);
                 String filename=file.getOriginalFilename();
-                String fileBaseName=filename.substring(0,filename.lastIndexOf("."));
-                String fileExt=filename.substring(filename.lastIndexOf(".")+1).toLowerCase();
                 String filePath="C://Users/G/IdeaProjects/gant1213/src/main/resources/static/f/html/uploadimg/"+filename;
                 System.out.println("保存的路径:"+filePath);
                 File targetFile = new File(filePath);
@@ -145,8 +168,13 @@ public class Usercontroller {
                 String saveUrl =request.getContextPath()+"/f/html/uploadimg/"+filename;
                 System.out.print( "访问路径："+saveUrl );
                 map.put("url", saveUrl);
+                map.put( "success",1 );
+                map.put( "message","image is upload" );
+
             }else {
-                map.put( "file","file is null" );
+                map.put( "message","image is null" );
+                map.put( "success",0 );
+
             }
 
 
@@ -156,28 +184,10 @@ public class Usercontroller {
 
 
     @RequestMapping("/upload")
-    public String upload(HttpServletRequest request,Model model) throws Exception {
-        MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
-        List<MultipartFile> files=params.getFiles( "file" );
-        if (files.size()!=0){
-            BufferedOutputStream outputStream;
-            for (MultipartFile file:files){
-                if(!file.isEmpty()){
-                    try {
-                        byte[] bytes=file.getBytes();
-                        outputStream=new BufferedOutputStream( new FileOutputStream( new File(  "C://upload"+file.getOriginalFilename() ) )  );
-                        model.addAttribute( "file","文件上传成功" );
-                        outputStream.write( bytes );
-                        outputStream.close();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        String text=params.getParameter( "text" );
-        System.out.print( "上传的文本为："+text );
-        model.addAttribute( "text","文本上传成功："+text );
-        return "success";
+    public String upload(Model model, String title,@RequestParam(name = "my-editormd-html-code") String text) throws Exception {
+        System.out.println( text );
+        article a=new article(title,text);
+        model.addAttribute( "article",a);
+        return "article";
     }
 }

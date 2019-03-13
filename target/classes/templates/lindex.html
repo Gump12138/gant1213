@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Gmb的个人博客">
-    <meta name="author" content="Gump1213">
+    <meta name="author" content="Gant1213">
 
     <title>Gant首页</title>
-
 
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -34,24 +32,26 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/b/about.html">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item dropup">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">article<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item">
-                            <a class="dropdown-item-text" href="/b/write/a.html">Java基础—逻辑</a></li>
+                            <a class="dropdown-item-text" href="/a">Java基础—逻辑</a></li>
                         <li class="dropdown-item">
-                            <a class="dropdown-item-text" href="/b/write/b.html">Java基础-编程语言特性</a></li>
+                            <a class="dropdown-item-text" href="/b">Java基础-编程语言特性</a></li>
                         <li class="dropdown-item">
-                            <a class="dropdown-item-text" href="/b/write/c.html">Java基础-数据类型</a></li>
+                            <a class="dropdown-item-text" href="/c">Java基础-数据类型</a></li>
                         <li class="dropdown-item">
-                            <a class="dropdown-item-text" href="/b/write/d.html">Java基础-数据结构</a></li>
+                            <a class="dropdown-item-text" href="/d">Java基础-数据结构</a></li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-item-text" href="/e">算七八糟算法篇</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropup no-arrow" id="user">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="'欢迎'+${user.getUsername()}+'!'">unknow</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="'欢迎'+${session.user.getUsername()}+'!'">unknow</span>
                         <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/25x25" alt="">
                     </a>
                     <!-- Dropdown - User Information -->
@@ -87,9 +87,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1 class="mt-5" >The Big Picture</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt voluptates rerum eveniet sapiente repellat esse, doloremque quod recusandae deleniti nostrum assumenda vel beatae sed aut modi nesciunt porro quisquam voluptatem.</p>
-            </div>
+                <h1 class="mt-5" >GM 博客</h1>
+                <p>主要内容：</p>
+                <p> 用户登陆注册；学习的文章；简历； 后台：用户，文章编辑</p>
+                <p>技术：spring,springmvc,mybatis,html,thymelaf,Bootstrap,sb2,Datatables</p>
+        </div>
         </div>
     </div>
 </section>
